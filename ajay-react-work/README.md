@@ -68,3 +68,103 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+import React, { useState } from 'react';
+
+const Sidebar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div style={{ width: isOpen ? '300px' : '0', transition: 'width 0.3s' }}>
+      <button onClick={toggleSidebar}>{isOpen ? 'Close' : 'Open'} Menu</button>
+      {isOpen && (
+        <nav>
+          <h3>Menu</h3>
+          <ul>
+            <li>
+              Organization
+              <ul>
+                <li>Create Organization</li>
+                <li>View Organization</li>
+              </ul>
+            </li>
+            <li>
+              Application
+              <ul>
+                <li>Create Application</li>
+                <li>View Application</li>
+              </ul>
+            </li>
+            <li>
+              EULA
+              <ul>
+                <li>Create EULA</li>
+                <li>Mapping EULA</li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      )}
+    </div>
+  );
+};
+
+export default Sidebar;
+
+import React from 'react';
+
+const MainContent: React.FC = () => {
+  return (
+    <div style={{ flex: 1, padding: '20px' }}>
+      <h2>Welcome to the application</h2>
+      <p>Select an option from the left menu.</p>
+      {/* You can add the forms and grids here based on selected menu */}
+    </div>
+  );
+};
+
+export default MainContent;
+
+import React from 'react';
+import './App.css'; // Add your styles here
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
+import MainContent from './components/MainContent';
+
+const App: React.FC = () => {
+  return (
+    <div className="App" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <Header />
+      <div style={{ display: 'flex', flex: 1 }}>
+        <Sidebar />
+        <MainContent />
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+header,
+footer {
+  background-color: #f5f5f5;
+  padding: 15px;
+  text-align: center;
+}
+nav {
+  padding: 15px;
+  background: #fff;
+  border-right: 1px solid #ccc;
+}
+
